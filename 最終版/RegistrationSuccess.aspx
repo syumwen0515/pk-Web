@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration Success</title>
+    <title>註冊成功！</title>
     <script>
         // 當頁面載入後開始倒數計時
         window.onload = function () {
@@ -21,11 +21,19 @@
             }, 1000);
         };
     </script>
+    <style type="text/css">
+        .auto-style1 {
+            font-family: "jf金萱3.0 六分糖";
+        }
+        .auto-style2 {
+            font-family: "jf金萱3.0 四分糖";
+        }
+    </style>
 </head>
 <body>
     <div>
-        <h2>Registration Successful!</h2>
-        <p>You will be redirected to the login page in <span id="countdown">3</span> seconds.</p>
+        <h2 class="auto-style1">註冊成功！</h2>
+        <p><span class="auto-style2">您將在 </span> <span id="countdown" class="auto-style2">3</span><span class="auto-style2"> 秒內重新導向至登入頁面。</span></p>
     </div>
 </body>
 </html>

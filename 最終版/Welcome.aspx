@@ -44,10 +44,10 @@
         }
     </style>
 </head>
-<body>
+<body onload="showAllCategories()">
     <!-- 導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="#">Online Store</a>
+        <a class="navbar-brand" href="index.aspx">熱食部購物系統</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -57,19 +57,13 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Products</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
             </ul>
             <!-- 顯示使用者 ID -->
             <span class="navbar-text">
                 Hi, <asp:Label ID="lblUserIdNavbar" runat="server" Text=""></asp:Label>!
             </span>
             <!-- 購物車按鈕 -->
-            <button type="button" class="btn btn-light ml-3" onclick="openCartModal()">Cart <span id="lblCartCount" class="badge badge-pill badge-primary">0</span></button>
+            <button type="button" class="btn btn-light ml-3" onclick="openCartModal()">購物車 <span id="lblCartCount" class="badge badge-pill badge-primary">0</span></button>
         </div>
     </nav>
 
@@ -79,22 +73,22 @@
         <!-- 側邊欄 -->
         <div class="col-md-3">
             <div class="sidebar">
-                <h5>Categories</h5>
-                <a href="#" class="category-link">All Products</a>
-                <a href="#" class="category-link">Main Dishes</a>
-                <a href="#" class="category-link">Snacks</a>
-                <a href="#" class="category-link">Drinks</a>
+                <h5>分類</h5>
+                <a href="#" class="category-link" onclick="showCategory('全部商品')">全部商品</a>
+                <a href="#" class="category-link" onclick="showCategory('主食')">主食</a>
+                <a href="#" class="category-link" onclick="showCategory('點心')">點心</a>
+                <a href="#" class="category-link" onclick="showCategory('飲料')">飲料</a>
                 <!-- 在這裡添加其他分類連結 -->
             </div>
             <!-- 購物車 -->
             <div class="sidebar mt-4">
-                <h5>Shopping Cart</h5>
+                <h5>購物清單</h5>
                 <ul id="cartItems">
                     <!-- 在此顯示購物車項目 -->
                 </ul>
                 <div>
-                    <button class="btn btn-danger mt-2" onclick="clearCart()">Clear Cart</button>
-                    <button class="btn btn-success mt-2" onclick="checkout()">Checkout</button>
+                    <button class="btn btn-danger mt-2" onclick="clearCart()">清空</button>
+                    <button class="btn btn-success mt-2" onclick="checkout()">送出</button>
                 </div>
             </div>
         </div>
@@ -103,7 +97,7 @@
         <div class="col-md-9">
             <!-- 範例商品模板 -->
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-4 category-全部商品 category-主食">
                     <div class="card mb-4">
                         <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
                         <div class="card-body">
@@ -120,11 +114,11 @@
                                 </div>
                             </div>
                             <!-- Add to Cart 按鈕 -->
-                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 1', 9.99, parseInt(document.getElementById('product1').value), 'addButton1')">Add to Cart</a>
+                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 1', 9.99, parseInt(document.getElementById('product1').value), 'addButton1')">新增</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4 category-全部商品 category-點心">
                     <div class="card mb-4">
                         <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
                         <div class="card-body">
@@ -141,7 +135,7 @@
                                 </div>
                             </div>
                             <!-- Add to Cart 按鈕 -->
-                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 2', 99.99, parseInt(document.getElementById('product2').value), 'addButton2')">Add to Cart</a>
+                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 2', 99.99, parseInt(document.getElementById('product2').value), 'addButton2')">新增</a>
                         </div>
                     </div>
                 </div>
@@ -250,6 +244,30 @@
         function incrementProductQuantity(productId) {
             var input = document.getElementById(productId);
             input.value = parseInt(input.value) + 1;
+        }
+
+        // 显示特定类别的商品
+        function showCategory(category) {
+            // 首先隐藏所有商品
+            var allProducts = document.querySelectorAll('.col-md-4');
+            allProducts.forEach(function (product) {
+                product.style.display = 'none';
+            });
+
+            // 根据所选类别显示相应的商品
+            var categoryProducts = document.querySelectorAll('.category-' + category);
+            categoryProducts.forEach(function (product) {
+                product.style.display = 'block';
+            });
+        }
+
+        // 页面加载时默认显示所有商品
+        function showAllCategories() {
+            // 首先显示所有商品
+            var allProducts = document.querySelectorAll('.col-md-4');
+            allProducts.forEach(function (product) {
+                product.style.display = 'block';
+            });
         }
     </script>
 </body>

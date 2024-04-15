@@ -27,8 +27,6 @@ namespace 最終版
             cookie.Value = username;
 
             // 在這裡進行使用者名稱和密碼的驗證
-            // 這裡只是一個示範，您需要根據您的需求來實作驗證邏輯
-            // 假設您的 Access 數據庫表名為 Users，並且包含名為 Username 和 Password 的列
             string connectionString = "Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\\網頁設計\\最終版\\最終版\\Database1.accdb;";
             string query = "SELECT Count(*) FROM client WHERE username = @Username AND password = @Password";
 
@@ -53,7 +51,7 @@ namespace 最終版
                     else
                     {
                         // 登入失敗，顯示錯誤訊息
-                        lblMessage.Text = "Invalid username or password.";
+                        lblMessage.Text = "使用者帳號或密碼錯誤！";
                         lblMessage.Visible = true;
                     }
                 }
