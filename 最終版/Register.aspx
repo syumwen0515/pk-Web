@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration</title>
     <!-- 引入 Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/4.0.0.bootstrap.min.css" rel="stylesheet" />
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -42,7 +42,13 @@
             text-align: center;
             width: 100%;
             font-size: 24px;
-            color: #fff !important; /* 將文字顏色更改為白色 */
+            color: #fff !important;
+            font-family: 標楷體;
+        }
+        .auto-style1 {
+            text-align: center;
+            font-family: 標楷體;
+            font-weight: normal;
         }
     </style>
 </head>
@@ -61,7 +67,7 @@
                     <div class="login-form">
                         <div class="card">
                             <div class="card-header">
-                                <h2 class="text-center">Registration</h2>
+                                <h2 class="auto-style1">註冊</h2>
                             </div>
                             <div class="card-body">
                                 <div class="form-group">
@@ -72,12 +78,12 @@
                                     <label for="txtPassword">Password:</label>
                                     <asp:TextBox ID="txtPassword" runat="server" TextMode="Password" CssClass="form-control"></asp:TextBox>
                                 </div>
-                                <asp:Button ID="btnRegister" runat="server" Text="Register" OnClick="btnRegister_Click" CssClass="btn btn-primary btn-block" />
+                                <asp:Button ID="btnRegister" runat="server" Text="註冊" OnClick="btnRegister_Click" CssClass="btn btn-primary btn-block" />
                                 <asp:Label ID="lblMessage" runat="server" ForeColor="Green" Visible="false" CssClass="text-success mt-2"></asp:Label>
                             </div>
                             <div class="card-footer">
                                 <div class="text-center">
-                                    <a href="login.aspx">Login</a>
+                                    <a href="login.aspx">登入</a>
                                 </div>
                             </div>
                         </div>
@@ -88,6 +94,6 @@
     </form>
 
     <!-- 引入 Bootstrap JS（如果需要） -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="js/4.0.0.bootstrap.min.js"></script>
 </body>
 </html>

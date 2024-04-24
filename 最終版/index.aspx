@@ -14,9 +14,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
 
-
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@docsearch/css@3">
+    <link href="css/css@3.css" rel="stylesheet" />
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
 

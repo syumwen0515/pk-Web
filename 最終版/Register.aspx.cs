@@ -20,42 +20,69 @@ namespace 最終版
 
             // 假設您的資料庫連接字串為 connectionString，並且有一個名為 client 的表格，包含 username 和 password 兩個欄位
             string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=D:\網頁設計\最終版\最終版\Database1.accdb;";
+            string checkUserIdQuery = "SELECT Count(*) FROM client WHERE username = @Username";
             string query = "INSERT INTO client VALUES (@Username, @Password)";
+            int userIdCount = 0;
 
             using (OleDbConnection connection = new OleDbConnection(connectionString))
             {
-                using (OleDbCommand command = new OleDbCommand(query, connection))
+                using (OleDbCommand checkUserIdCommand = new OleDbCommand(checkUserIdQuery, connection))
                 {
-                    var usernameParameter = new OleDbParameter
+                    var usernamechk = new OleDbParameter
                     {
                         DbType = DbType.AnsiString,
                         ParameterName = "@Username",
                         Value = username
                     };
-                    command.Parameters.Add(usernameParameter);
-
-                    var passwordParameter = new OleDbParameter
-                    {
-                        DbType = DbType.AnsiString,
-                        ParameterName = "@Password",
-                        Value = password
-                    };
-                    command.Parameters.Add(passwordParameter);
+                    checkUserIdCommand.Parameters.Add(usernamechk);
 
                     connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
+                    userIdCount = (int)checkUserIdCommand.ExecuteScalar();
                     connection.Close();
 
-                    // 檢查是否成功添加新用戶
-                    if (rowsAffected > 0)
+                    // 檢查用戶是否存在
+                    if (userIdCount == 0)
                     {
-                        // 注冊成功，可以執行其他操作，例如重定向到登錄頁面
-                        Response.Redirect("RegistrationSuccess.aspx");
+                        using (OleDbCommand command = new OleDbCommand(query, connection))
+                        {
+                            var usernameParameter = new OleDbParameter
+                            {
+                                DbType = DbType.AnsiString,
+                                ParameterName = "@Username",
+                                Value = username
+                            };
+                            command.Parameters.Add(usernameParameter);
+
+                            var passwordParameter = new OleDbParameter
+                            {
+                                DbType = DbType.AnsiString,
+                                ParameterName = "@Password",
+                                Value = password
+                            };
+                            command.Parameters.Add(passwordParameter);
+
+                            connection.Open();
+                            int rowsAffected = command.ExecuteNonQuery();
+                            connection.Close();
+
+                            // 檢查是否成功添加新用戶
+                            if (rowsAffected > 0)
+                            {
+                                // 注冊成功，可以執行其他操作，例如重定向到登錄頁面
+                                Response.Redirect("RegistrationSuccess.aspx");
+                            }
+                            else
+                            {
+                                // 注冊失敗，顯示錯誤消息
+                                lblMessage.Text = "Registration failed. Please try again.";
+                                lblMessage.Visible = true;
+                            }
+                        }
                     }
                     else
                     {
                         // 注冊失敗，顯示錯誤消息
-                        lblMessage.Text = "Registration failed. Please try again.";
+                        lblMessage.Text = "使用者ID已存在！";
                         lblMessage.Visible = true;
                     }
                 }

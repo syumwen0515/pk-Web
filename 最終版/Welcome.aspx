@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Store</title>
     <!-- 引入 Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/4.0.0.bootstrap.min.css" rel="stylesheet" />
     <style>
         /* 自訂樣式 */
         /* 在這裡添加您的自訂 CSS */
@@ -147,9 +147,9 @@
 
 
     <!-- 引入 Bootstrap JS（如果需要） -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="js/jquery-3.2.1.slim.min.js"></script>
+    <script src="js/popper1.min.js"></script>
+    <script src="js/4.0.0.bootstrap.min.js"></script>
     <!-- JavaScript for handling cart modal -->
     <script>
         // 商品數量
