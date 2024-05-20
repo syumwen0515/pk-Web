@@ -35,20 +35,29 @@
         }
         /* 左側文字設置 */
         .left-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            width: 100%;
-            font-size: 24px;
-            color: #fff !important;
-            font-family: 標楷體;
+            position: absolute; /* 絕對定位 */
+            top: 50%; /* 上方位置置中 */
+            left: 0; /* 與左側對齊 */
+            transform: translate(0, -50%); /* 使用 transform 屬性垂直置中 */
+            text-align: center; /* 文字水平置中 */
+            width: 100%; /* 寬度 100% */
+            font-size: 24px; /* 文字大小 */
+            color: #fff !important; /* 文字顏色 */
+            font-family: 標楷體; /* 使用標楷體字型 */
         }
         .auto-style1 {
             text-align: center;
             font-family: 標楷體;
             font-weight: normal;
+        }
+        @media (max-width: 768px) {
+            .left-text {
+                position: relative; /* 相對定位 */
+                transform: none; /* 清除 transform 屬性 */
+                top: auto; /* 清除 top 屬性 */
+                left: auto; /* 清除 left 屬性 */
+                margin-top: 0; /* 清除上邊距 */
+            }
         }
     </style>
 </head>

@@ -1,32 +1,23 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Welcome.aspx.cs" Inherits="最終版.Welcome" %>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Store</title>
-    <!-- 引入 Bootstrap CSS -->
     <link href="css/4.0.0.bootstrap.min.css" rel="stylesheet" />
     <style>
-        /* 自訂樣式 */
-        /* 在這裡添加您的自訂 CSS */
-
-        /* 左側分類區塊 */
         .sidebar {
-            background-color: #f8f9fa; /* 側邊欄背景色 */
+            background-color: #f8f9fa;
             padding: 20px;
         }
-
-        /* 分類連結樣式 */
         .category-link {
             display: block;
             margin-bottom: 10px;
             text-decoration: none;
-            color: #343a40; /* 分類連結文字顏色 */
+            color: #343a40;
         }
-
-        /* 購物車浮動視窗樣式 */
         .cart-modal {
             position: fixed;
             top: 50%;
@@ -38,18 +29,16 @@
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
             display: none;
         }
-
         .cart-modal.show {
             display: block;
         }
     </style>
 </head>
 <body onload="showAllCategories()">
-    <!-- 導覽列 -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <a class="navbar-brand" href="index.aspx">熱食部購物系統</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -57,217 +46,217 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="GeneralReport.aspx">一般報表</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="StatisticsReport.aspx">統計報表</a>
+                </li>
             </ul>
-            <!-- 顯示使用者 ID -->
             <span class="navbar-text">
                 Hi, <asp:Label ID="lblUserIdNavbar" runat="server" Text=""></asp:Label>!
             </span>
-            <!-- 購物車按鈕 -->
             <button type="button" class="btn btn-light ml-3" onclick="openCartModal()">購物車 <span id="lblCartCount" class="badge badge-pill badge-primary">0</span></button>
         </div>
     </nav>
 
-    <!-- 主要內容 -->
-<div class="container">
-    <div class="row">
-        <!-- 側邊欄 -->
-        <div class="col-md-3">
-            <div class="sidebar">
-                <h5>分類</h5>
-                <a href="#" class="category-link" onclick="showCategory('全部商品')">全部商品</a>
-                <a href="#" class="category-link" onclick="showCategory('主食')">主食</a>
-                <a href="#" class="category-link" onclick="showCategory('點心')">點心</a>
-                <a href="#" class="category-link" onclick="showCategory('飲料')">飲料</a>
-                <!-- 在這裡添加其他分類連結 -->
-            </div>
-            <!-- 購物車 -->
-            <div class="sidebar mt-4">
-                <h5>購物清單</h5>
-                <ul id="cartItems">
-                    <!-- 在此顯示購物車項目 -->
-                </ul>
-                <div>
-                    <button class="btn btn-danger mt-2" onclick="clearCart()">清空</button>
-                    <button class="btn btn-success mt-2" onclick="checkout()">送出</button>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="sidebar">
+                    <h5>分類</h5>
+                    <a href="#" class="category-link" onclick="showAllCategories()">全部商品</a>
+                    <a href="#" class="category-link" onclick="showCategory('主食')">主食</a>
+                    <a href="#" class="category-link" onclick="showCategory('點心')">點心</a>
+                    <a href="#" class="category-link" onclick="showCategory('飲料')">飲料</a>
                 </div>
-            </div>
-        </div>
-
-        <!-- 主要內容區域 -->
-        <div class="col-md-9">
-            <!-- 範例商品模板 -->
-            <div class="row">
-                <div class="col-md-4 category-全部商品 category-主食">
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Name 1</h5>
-                            <p class="card-text">$9.99</p>
-                            <!-- 商品數量 -->
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="decrementProductQuantity('product1')">-</button>
-                                </div>
-                                <input id="product1" type="number" class="form-control" value="1" min="1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="incrementProductQuantity('product1')">+</button>
-                                </div>
-                            </div>
-                            <!-- Add to Cart 按鈕 -->
-                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 1', 9.99, parseInt(document.getElementById('product1').value), 'addButton1')">新增</a>
-                        </div>
+                <div class="sidebar mt-4">
+                    <h5>購物清單</h5>
+                    <ul id="cartItems"></ul>
+                    <div>
+                        <button class="btn btn-danger mt-2" onclick="clearCart()">清空</button>
+                        <button class="btn btn-success mt-2" onclick="checkout()">送出</button>
                     </div>
                 </div>
-                <div class="col-md-4 category-全部商品 category-點心">
-                    <div class="card mb-4">
-                        <img class="card-img-top" src="https://via.placeholder.com/150" alt="Product Image">
-                        <div class="card-body">
-                            <h5 class="card-title">Product Name 2</h5>
-                            <p class="card-text">$99.99</p>
-                            <!-- 商品數量 -->
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="decrementProductQuantity('product2')">-</button>
-                                </div>
-                                <input id="product2" type="number" class="form-control" value="1" min="1">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="button" onclick="incrementProductQuantity('product2')">+</button>
-                                </div>
-                            </div>
-                            <!-- Add to Cart 按鈕 -->
-                            <a href="#" class="btn btn-primary" onclick="addToCart('Product Name 2', 99.99, parseInt(document.getElementById('product2').value), 'addButton2')">新增</a>
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-9">
+                <div class="row" id="productList">
+                    <!-- 商品列表將在這裡顯示 -->
                 </div>
-                <!-- 添加更多範例商品模板 -->
             </div>
         </div>
     </div>
-</div>
 
-
-    <!-- 引入 Bootstrap JS（如果需要） -->
     <script src="js/jquery-3.2.1.slim.min.js"></script>
     <script src="js/popper1.min.js"></script>
     <script src="js/4.0.0.bootstrap.min.js"></script>
-    <!-- JavaScript for handling cart modal -->
     <script>
-        // 商品數量
-        var productQuantities = {
-            product1: 0,
-            product2: 0,
-            product3: 0
-        };
-
-        // 增加商品數量
-        function incrementQuantity(productId) {
-            productQuantities[productId]++;
-            document.getElementById(productId).value = productQuantities[productId];
-        }
-
-        // 減少商品數量
-        function decrementQuantity(productId) {
-            if (productQuantities[productId] > 0) {
-                productQuantities[productId]--;
-                document.getElementById(productId).value = productQuantities[productId];
-            }
-        }
-
-        // 開啟購物車
-        function openCartModal() {
-            document.getElementById("cartModal").classList.add("show");
-        }
-
-        // 關閉購物車
-        function closeCartModal() {
-            document.getElementById("cartModal").classList.remove("show");
-        }
-
-        // 商品清單
+        // 初始化購物車
         var cartItems = [];
 
-        // 加入購物車
-        function addToCart(productName, productPrice, quantity, buttonId) {
-            // 檢查商品是否已存在於購物車中，若存在則增加數量，否則新增商品
-            var existingItem = cartItems.find(item => item.name === productName);
-            if (existingItem) {
-                existingItem.quantity = quantity; // 增加商品數量
-            } else {
-                cartItems.push({ name: productName, price: productPrice, quantity: quantity }); // 新增商品
-            }
+        // 顯示所有商品
+        function showAllCategories() {
+            fetch('/GetProducts.ashx')
+                .then(response => response.json())
+                .then(data => {
+                    var productList = document.getElementById('productList');
+                    productList.innerHTML = ''; // 清空現有的商品列表
+                    data.forEach(product => {
+                        var productDiv = document.createElement('div');
+                        productDiv.className = 'col-md-4 category-' + product.Category;
 
-            // 更新購物車視窗內容
-            updateCart();
+                        var card = document.createElement('div');
+                        card.className = 'card mb-4';
 
-            // 隱藏添加到購物車按鈕
-            document.getElementById(buttonId).style.display = 'none';
+                        var img = document.createElement('img');
+                        img.className = 'card-img-top';
+                        img.src = product.ImageUrl;
+                        img.alt = product.ProductName;  // 確保圖片有替代文字
+                        card.appendChild(img);
+
+                        var cardBody = document.createElement('div');
+                        cardBody.className = 'card-body';
+
+                        var title = document.createElement('h5');
+                        title.className = 'card-title';
+                        title.textContent = product.ProductName;
+                        cardBody.appendChild(title);
+
+                        var price = document.createElement('p');
+                        price.className = 'card-text';
+                        price.textContent = '$' + product.Price;
+                        cardBody.appendChild(price);
+
+                        var inputGroup = document.createElement('div');
+                        inputGroup.className = 'input-group mb-3';
+
+                        var inputGroupPrepend = document.createElement('div');
+                        inputGroupPrepend.className = 'input-group-prepend';
+
+                        var decrementButton = document.createElement('button');
+                        decrementButton.className = 'btn btn-outline-secondary';
+                        decrementButton.type = 'button';
+                        decrementButton.textContent = '-';
+                        decrementButton.onclick = function () {
+                            decrementProductQuantity(product.ProductID);
+                        };
+                        inputGroupPrepend.appendChild(decrementButton);
+                        inputGroup.appendChild(inputGroupPrepend);
+
+                        var quantityInput = document.createElement('input');
+                        quantityInput.id = 'product' + product.ProductID;
+                        quantityInput.type = 'number';
+                        quantityInput.className = 'form-control';
+                        quantityInput.value = 1;
+                        quantityInput.min = 1;
+                        inputGroup.appendChild(quantityInput);
+
+                        var inputGroupAppend = document.createElement('div');
+                        inputGroupAppend.className = 'input-group-append';
+
+                        var incrementButton = document.createElement('button');
+                        incrementButton.className = 'btn btn-outline-secondary';
+                        incrementButton.type = 'button';
+                        incrementButton.textContent = '+';
+                        incrementButton.onclick = function () {
+                            incrementProductQuantity(product.ProductID);
+                        };
+                        inputGroupAppend.appendChild(incrementButton);
+                        inputGroup.appendChild(inputGroupAppend);
+
+                        cardBody.appendChild(inputGroup);
+
+                        var addButton = document.createElement('a');
+                        addButton.href = '#';
+                        addButton.className = 'btn btn-primary';
+                        addButton.textContent = '新增';
+                        addButton.onclick = function () {
+                            addToCart(product.ProductName, product.Price, parseInt(quantityInput.value), 'addButton' + product.ProductID);
+                        };
+                        cardBody.appendChild(addButton);
+
+                        card.appendChild(cardBody);
+                        productDiv.appendChild(card);
+                        productList.appendChild(productDiv);
+                    });
+                });
         }
 
-        // 清空購物車
-        function clearCart() {
-            cartItems = []; // 清空購物車清單
-            updateCart(); // 更新購物車視窗
-        }
-
-        // 結帳
-        function checkout() {
-            // 在這裡添加結帳的相關邏輯，例如導向結帳頁面或彈出結帳提示
-            alert("Checkout function triggered. Implement your checkout logic here.");
-        }
-
-        // 更新購物車視窗
-        function updateCart() {
-            var cartList = document.getElementById("cartItems");
-            cartList.innerHTML = ""; // 清空原本的內容
-
-            // 將每個商品加入購物車清單中
-            cartItems.forEach(function (item) {
-                var listItem = document.createElement("li");
-                listItem.textContent = item.name + " - $" + item.price + " x " + item.quantity;
-                cartList.appendChild(listItem);
-            });
-
-            // 更新購物車商品數量
-            var totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-            document.getElementById("lblCartCount").textContent = totalQuantity;
-        }
-
-        // 減少商品數量
-        function decrementProductQuantity(productId) {
-            var input = document.getElementById(productId);
-            if (parseInt(input.value) > 1) {
-                input.value = parseInt(input.value) - 1;
-            }
-        }
-
-        // 增加商品數量
-        function incrementProductQuantity(productId) {
-            var input = document.getElementById(productId);
-            input.value = parseInt(input.value) + 1;
-        }
-
-        // 显示特定类别的商品
+        // 顯示特定分類的商品
         function showCategory(category) {
-            // 首先隐藏所有商品
             var allProducts = document.querySelectorAll('.col-md-4');
             allProducts.forEach(function (product) {
                 product.style.display = 'none';
             });
 
-            // 根据所选类别显示相应的商品
             var categoryProducts = document.querySelectorAll('.category-' + category);
             categoryProducts.forEach(function (product) {
                 product.style.display = 'block';
             });
         }
 
-        // 页面加载时默认显示所有商品
-        function showAllCategories() {
-            // 首先显示所有商品
-            var allProducts = document.querySelectorAll('.col-md-4');
-            allProducts.forEach(function (product) {
-                product.style.display = 'block';
+        function decrementProductQuantity(productId) {
+            var input = document.getElementById('product' + productId);
+            if (parseInt(input.value) > 1) {
+                input.value = parseInt(input.value) - 1;
+            }
+        }
+
+        function incrementProductQuantity(productId) {
+            var input = document.getElementById('product' + productId);
+            input.value = parseInt(input.value) + 1;
+        }
+
+        function addToCart(productName, productPrice, quantity, buttonId) {
+            var existingItem = cartItems.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity = quantity;
+            } else {
+                cartItems.push({ name: productName, price: productPrice, quantity: quantity });
+            }
+            updateCart();
+            document.getElementById(buttonId).style.display = 'none';
+        }
+
+        function clearCart() {
+            cartItems = [];
+            updateCart();
+        }
+
+        // 結帳
+        function checkout() {
+            if (cartItems.length === 0) {
+                alert("購物車為空，請先添加商品！");
+                return;
+            }
+
+            // 將資料轉換為JSON
+            var orderData = JSON.stringify(cartItems);
+
+            // 使用AJAX將資料傳送到後端
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "SaveOrder.aspx", true);
+            xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    // 成功訊息
+                    alert("訂單已成功提交！");
+                    clearCart(); // 清空購物車
+                }
+            };
+            xhr.send(orderData);
+        }
+
+        function updateCart() {
+            var cartList = document.getElementById("cartItems");
+            cartList.innerHTML = "";
+            cartItems.forEach(function (item) {
+                var listItem = document.createElement("li");
+                listItem.textContent = item.name + " - $" + item.price + " x " + item.quantity;
+                cartList.appendChild(listItem);
             });
+            var totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
+            document.getElementById("lblCartCount").textContent = totalQuantity;
         }
     </script>
 </body>

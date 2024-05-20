@@ -70,18 +70,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="checkout.aspx" />
+    <Content Include="css\4.0.0.bootstrap.min.css" />
     <Content Include="css\css%403.css" />
+    <Content Include="GeneralReport.aspx" />
     <Content Include="index.aspx" />
+    <Content Include="js\4.0.0.bootstrap.min.js" />
+    <Content Include="js\jquery-3.2.1.slim.min.js" />
+    <Content Include="js\popper1.min.js" />
     <Content Include="login.aspx" />
     <Content Include="Order.aspx" />
     <Content Include="photo\logo.png" />
     <Content Include="photo\麥當勞.jpg" />
     <Content Include="Register.aspx" />
     <Content Include="RegistrationSuccess.aspx" />
+    <Content Include="SaveOrder.aspx" />
+    <Content Include="StatisticsReport.aspx" />
     <Content Include="Web.config" />
     <Content Include="Welcome.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="checkout.aspx.cs">
+      <DependentUpon>checkout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="checkout.aspx.designer.cs">
+      <DependentUpon>checkout.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralReport.aspx.cs">
+      <DependentUpon>GeneralReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="GeneralReport.aspx.designer.cs">
+      <DependentUpon>GeneralReport.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="GetProducts.ashx.cs">
+      <DependentUpon>GetProducts.ashx</DependentUpon>
+    </Compile>
+    <Compile Include="GetStatisticsData.ashx.cs">
+      <DependentUpon>GetStatisticsData.ashx</DependentUpon>
+    </Compile>
     <Compile Include="index.aspx.cs">
       <DependentUpon>index.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -118,6 +146,20 @@
     <Compile Include="RegistrationSuccess.aspx.designer.cs">
       <DependentUpon>RegistrationSuccess.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SaveOrder.aspx.cs">
+      <DependentUpon>SaveOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SaveOrder.aspx.designer.cs">
+      <DependentUpon>SaveOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticsReport.aspx.cs">
+      <DependentUpon>StatisticsReport.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="StatisticsReport.aspx.designer.cs">
+      <DependentUpon>StatisticsReport.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Welcome.aspx.cs">
       <DependentUpon>Welcome.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -127,6 +169,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="GetStatisticsData.ashx" />
+    <Content Include="GetProducts.ashx" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

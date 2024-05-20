@@ -3,8 +3,10 @@
 <!doctype html>
 <html lang="en" class="h-100" data-bs-theme="auto">
 <head>
+    <!-- 包含處理顏色模式的腳本 -->
     <script src="js/color-modes.js"></script>
 
+    <!-- Meta標籤 -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
@@ -14,11 +16,15 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/cover/">
 
+    <!-- 自定義CSS -->
     <link href="css/css@3.css" rel="stylesheet" />
 
+    <!-- Bootstrap CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- 內部樣式 -->
     <style>
+        /* 佔位符圖像的樣式 */
         .bd-placeholder-img {
             font-size: 1.125rem;
             text-anchor: middle;
@@ -28,11 +34,13 @@
         }
 
         @media (min-width: 768px) {
+            /* 大型佔位符圖像的樣式 */
             .bd-placeholder-img-lg {
                 font-size: 3.5rem;
             }
         }
 
+        /* 分隔區段之間的分隔線 */
         .b-example-divider {
             width: 100%;
             height: 3rem;
@@ -42,17 +50,20 @@
             box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
         }
 
+        /* 垂直分隔線 */
         .b-example-vr {
             flex-shrink: 0;
             width: 1.5rem;
             height: 100vh;
         }
 
+        /* Bootstrap圖標 */
         .bi {
             vertical-align: -.125em;
             fill: currentColor;
         }
 
+        /* 導航捲動條 */
         .nav-scroller {
             position: relative;
             z-index: 2;
@@ -71,6 +82,7 @@
                 -webkit-overflow-scrolling: touch;
             }
 
+        /* 自定義按鈕樣式 */
         .btn-bd-primary {
             --bd-violet-bg: #712cf9;
             --bd-violet-rgb: 112.520718, 44.062154, 249.437846;
@@ -87,6 +99,7 @@
             --bs-btn-active-border-color: #5a23c8;
         }
 
+        /* 顏色模式切換器 */
         .bd-mode-toggle {
             z-index: 1500;
         }
@@ -97,10 +110,11 @@
     </style>
 
 
-    <!-- Custom styles for this template -->
+    <!-- 自定義樣式 -->
     <link href="homepage.css" rel="stylesheet">
 </head>
 <body class="d-flex h-100 text-center text-bg-dark">
+    <!-- 隱藏的SVG符號 -->
     <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
             <path d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
@@ -117,35 +131,36 @@
         </symbol>
     </svg>
 
+    <!-- 顏色主題切換下拉式選單 -->
     <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
         <button class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
                 id="bd-theme"
                 type="button"
                 aria-expanded="false"
                 data-bs-toggle="dropdown"
-                aria-label="Toggle theme (auto)">
+                aria-label="切換主題（自動）">
             <svg class="bi my-1 theme-icon-active" width="1em" height="1em"><use href="#circle-half"></use></svg>
-            <span class="visually-hidden" id="bd-theme-text">Toggle theme</span>
+            <span class="visually-hidden" id="bd-theme-text">切換主題</span>
         </button>
         <ul class="dropdown-menu dropdown-menu-end shadow" aria-labelledby="bd-theme-text">
             <li>
                 <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="light" aria-pressed="false">
                     <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#sun-fill"></use></svg>
-                    Light
+                    亮色主題
                     <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
                 </button>
             </li>
             <li>
                 <button type="button" class="dropdown-item d-flex align-items-center" data-bs-theme-value="dark" aria-pressed="false">
                     <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#moon-stars-fill"></use></svg>
-                    Dark
+                    暗色主題
                     <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
                 </button>
             </li>
             <li>
                 <button type="button" class="dropdown-item d-flex align-items-center active" data-bs-theme-value="auto" aria-pressed="true">
                     <svg class="bi me-2 opacity-50" width="1em" height="1em"><use href="#circle-half"></use></svg>
-                    Auto
+                    自動主題
                     <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2"></use></svg>
                 </button>
             </li>
@@ -153,6 +168,7 @@
     </div>
 
 
+    <!-- 封面容器 -->
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <header class="mb-auto">
             <div>
@@ -164,14 +180,15 @@
             <h1>熱食部訂餐系統</h1>
             <p class="start">此網站僅限115年班資工系使用</p>
             <p class="start">
-                <a class="btn btn-lg btn-light fw-bold border-white bg-white" onclick="href='login.aspx'">Start</a>
+                <a class="btn btn-lg btn-light fw-bold border-white bg-white" onclick="href='login.aspx'">開始</a>
             </p>
         </main>
 
         <footer class="mt-auto text-white-50">
-            <p>by <a href="https://hackmd.io/@Fredericcc" class="text-white">@Fredericcc</a></p>
+            <p>由 <a href="https://hackmd.io/@Fredericcc" class="text-white">@Fredericcc</a> 製作</p>
         </footer>
     </div>
+    <!-- Bootstrap Bundle JS -->
     <script src="js/bootstrap.bundle.min.js"></script>
 
 </body>

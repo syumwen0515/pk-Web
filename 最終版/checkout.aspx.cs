@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace 最終版
 {
-    public partial class Welcome : System.Web.UI.Page
+    public partial class checkout : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,18 +20,12 @@ namespace 最終版
                 // 将用户 ID 设置为 lblUserIdNavbar 的文本
                 lblUserIdNavbar.Text = userId;
             }
-            else
-            {
-                // 如果不存在名为 "UserId" 的 cookie，则将文本设置为默认值或者空字符串
-                lblUserIdNavbar.Text = "Guest";
-            }
+
+            // 從 URL 中獲取參數
+            string checkoutDetails = Request.QueryString["checkoutDetails"];
+
+            // 將購物清單資訊顯示在 Literal 控制項中
+            checkoutDetailsLiteral.Text = checkoutDetails;
         }
-
-        protected void checkout()
-        {
-            
-        }
-
-
     }
 }
