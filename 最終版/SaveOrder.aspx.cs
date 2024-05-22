@@ -22,16 +22,11 @@ namespace 最終版
 
                 // 從Cookie中讀取使用者名稱
                 string userName = "Guest";
-                //HttpCookie userCookie = Request.Cookies["UserName"];
-                //if (userCookie != null)
-                //{
-                //    userName = userCookie.Value;
-                //}
 
-                // 检查是否存在名为 "UserId" 的 cookie
+                // 檢查是否存在名為 "UserId" 的 cookie
                 if (Request.Cookies["UserId"] != null)
                 {
-                    // 获取名为 "UserId" 的 cookie 的值
+                    // 獲取名為 "UserId" 的 cookie 的值
                     userName = Request.Cookies["UserId"].Value;
                 }
 
@@ -41,14 +36,15 @@ namespace 最終版
                     connection.Open();
                     foreach (var order in orders)
                     {
-                        string query = "INSERT INTO Orders (UserName, Product, Quantity, Price, TotalPrice) VALUES (@UserName, @Product, @Quantity, @Price, @TotalPrice)";
+                        string query = "INSERT INTO Orders (UserName, Product, Quantity, Price, TotalPrice, OrderTime) VALUES (@UserName, @Product, @Quantity, @Price, @TotalPrice, @OrderTime)";
                         using (OleDbCommand command = new OleDbCommand(query, connection))
                         {
-                            command.Parameters.AddWithValue("@UserName", userName);
-                            command.Parameters.AddWithValue("@Product", order.name);
-                            command.Parameters.AddWithValue("@Quantity", order.quantity);
-                            command.Parameters.AddWithValue("@Price", order.price);
-                            command.Parameters.AddWithValue("@TotalPrice", order.price * order.quantity);
+                            command.Parameters.Add(new OleDbParameter("@UserName", OleDbType.VarChar)).Value = userName;
+                            command.Parameters.Add(new OleDbParameter("@Product", OleDbType.VarChar)).Value = order.name;
+                            command.Parameters.Add(new OleDbParameter("@Quantity", OleDbType.Integer)).Value = order.quantity;
+                            command.Parameters.Add(new OleDbParameter("@Price", OleDbType.Decimal)).Value = order.price;
+                            command.Parameters.Add(new OleDbParameter("@TotalPrice", OleDbType.Decimal)).Value = order.price * order.quantity;
+                            command.Parameters.Add(new OleDbParameter("@OrderTime", OleDbType.Date)).Value = DateTime.Now; // 記錄當前時間
 
                             command.ExecuteNonQuery();
                         }

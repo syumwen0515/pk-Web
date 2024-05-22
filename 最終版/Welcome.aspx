@@ -96,37 +96,48 @@
 
         // 顯示所有商品
         function showAllCategories() {
+            // 使用Fetch API發送請求以獲取所有產品數據
             fetch('/GetProducts.ashx')
-                .then(response => response.json())
+                .then(response => response.json()) // 解析回應為JSON格式
                 .then(data => {
+                    // 獲取DOM中的商品列表元素
                     var productList = document.getElementById('productList');
                     productList.innerHTML = ''; // 清空現有的商品列表
+
+                    // 遍歷每個產品數據
                     data.forEach(product => {
+                        // 創建一個包含產品信息的div元素
                         var productDiv = document.createElement('div');
                         productDiv.className = 'col-md-4 category-' + product.Category;
 
+                        // 創建卡片容器
                         var card = document.createElement('div');
                         card.className = 'card mb-4';
 
+                        // 創建產品圖片元素
                         var img = document.createElement('img');
                         img.className = 'card-img-top';
-                        img.src = product.ImageUrl;
-                        img.alt = product.ProductName;  // 確保圖片有替代文字
+                        img.src = product.ImageUrl; // 設置圖片URL
+                        img.alt = product.ProductName; // 確保圖片有替代文字
                         card.appendChild(img);
 
+                        // 創建卡片內容容器
                         var cardBody = document.createElement('div');
                         cardBody.className = 'card-body';
 
+                        // 創建產品名稱元素
                         var title = document.createElement('h5');
                         title.className = 'card-title';
-                        title.textContent = product.ProductName;
+                        title.textContent = product.ProductName; // 設置產品名稱
                         cardBody.appendChild(title);
 
+                        // 創建產品價格元素
                         var price = document.createElement('p');
                         price.className = 'card-text';
-                        price.textContent = '$' + product.Price;
+                        price.textContent = '$' + product.Price; // 設置產品價格
                         cardBody.appendChild(price);
 
+                        // 創建數量選擇輸入組
                         var inputGroup = document.createElement('div');
                         inputGroup.className = 'input-group mb-3';
 
@@ -138,7 +149,7 @@
                         decrementButton.type = 'button';
                         decrementButton.textContent = '-';
                         decrementButton.onclick = function () {
-                            decrementProductQuantity(product.ProductID);
+                            decrementProductQuantity(product.ProductID); // 調用減少數量函數
                         };
                         inputGroupPrepend.appendChild(decrementButton);
                         inputGroup.appendChild(inputGroupPrepend);
@@ -147,8 +158,8 @@
                         quantityInput.id = 'product' + product.ProductID;
                         quantityInput.type = 'number';
                         quantityInput.className = 'form-control';
-                        quantityInput.value = 1;
-                        quantityInput.min = 1;
+                        quantityInput.value = 1; // 設置初始數量
+                        quantityInput.min = 1; // 設置最小數量
                         inputGroup.appendChild(quantityInput);
 
                         var inputGroupAppend = document.createElement('div');
@@ -159,78 +170,90 @@
                         incrementButton.type = 'button';
                         incrementButton.textContent = '+';
                         incrementButton.onclick = function () {
-                            incrementProductQuantity(product.ProductID);
+                            incrementProductQuantity(product.ProductID); // 調用增加數量函數
                         };
                         inputGroupAppend.appendChild(incrementButton);
                         inputGroup.appendChild(inputGroupAppend);
 
                         cardBody.appendChild(inputGroup);
 
+                        // 創建新增按鈕
                         var addButton = document.createElement('a');
                         addButton.href = '#';
                         addButton.className = 'btn btn-primary';
                         addButton.textContent = '新增';
                         addButton.onclick = function () {
-                            addToCart(product.ProductName, product.Price, parseInt(quantityInput.value), 'addButton' + product.ProductID);
+                            addToCart(product.ProductName, product.Price, parseInt(quantityInput.value), 'addButton' + product.ProductID); // 調用新增到購物車函數
                         };
                         cardBody.appendChild(addButton);
 
+                        // 將卡片內容添加到卡片容器
                         card.appendChild(cardBody);
+                        // 將卡片容器添加到產品div
                         productDiv.appendChild(card);
+                        // 將產品div添加到產品列表
                         productList.appendChild(productDiv);
                     });
                 });
         }
 
+
         // 顯示特定分類的商品
         function showCategory(category) {
             var allProducts = document.querySelectorAll('.col-md-4');
+            // 隱藏所有商品
             allProducts.forEach(function (product) {
                 product.style.display = 'none';
             });
 
+            // 顯示特定分類的商品
             var categoryProducts = document.querySelectorAll('.category-' + category);
             categoryProducts.forEach(function (product) {
                 product.style.display = 'block';
             });
         }
 
+        // 減少商品數量
         function decrementProductQuantity(productId) {
             var input = document.getElementById('product' + productId);
             if (parseInt(input.value) > 1) {
-                input.value = parseInt(input.value) - 1;
+                input.value = parseInt(input.value) - 1; // 將數量減1
             }
         }
 
+        // 增加商品數量
         function incrementProductQuantity(productId) {
             var input = document.getElementById('product' + productId);
-            input.value = parseInt(input.value) + 1;
+            input.value = parseInt(input.value) + 1; // 將數量加1
         }
 
+        // 將商品加入購物車
         function addToCart(productName, productPrice, quantity, buttonId) {
+            // 檢查購物車中是否已經存在相同的商品
             var existingItem = cartItems.find(item => item.name === productName);
             if (existingItem) {
-                existingItem.quantity = quantity;
+                existingItem.quantity = quantity; // 更新數量
             } else {
-                cartItems.push({ name: productName, price: productPrice, quantity: quantity });
+                cartItems.push({ name: productName, price: productPrice, quantity: quantity }); // 添加新商品
             }
-            updateCart();
-            document.getElementById(buttonId).style.display = 'none';
+            updateCart(); // 更新購物車
+            document.getElementById(buttonId).style.display = 'none'; // 隱藏新增按鈕
         }
 
+        // 清空購物車
         function clearCart() {
-            cartItems = [];
-            updateCart();
+            cartItems = []; // 清空購物車數組
+            updateCart(); // 更新購物車顯示
         }
 
         // 結帳
         function checkout() {
             if (cartItems.length === 0) {
-                alert("購物車為空，請先添加商品！");
+                alert("購物車為空，請先添加商品！"); // 提示購物車為空
                 return;
             }
 
-            // 將資料轉換為JSON
+            // 將資料轉換為JSON格式
             var orderData = JSON.stringify(cartItems);
 
             // 使用AJAX將資料傳送到後端
@@ -244,19 +267,24 @@
                     clearCart(); // 清空購物車
                 }
             };
-            xhr.send(orderData);
+            xhr.send(orderData); // 發送訂單數據
         }
 
+        // 更新購物車顯示
         function updateCart() {
             var cartList = document.getElementById("cartItems");
-            cartList.innerHTML = "";
+            cartList.innerHTML = ""; // 清空現有的購物車列表
+
+            // 遍歷購物車中的每個商品並顯示
             cartItems.forEach(function (item) {
                 var listItem = document.createElement("li");
-                listItem.textContent = item.name + " - $" + item.price + " x " + item.quantity;
-                cartList.appendChild(listItem);
+                listItem.textContent = item.name + " - $" + item.price + " x " + item.quantity; // 顯示商品信息
+                cartList.appendChild(listItem); // 添加到購物車列表
             });
+
+            // 計算總數量並顯示
             var totalQuantity = cartItems.reduce((total, item) => total + item.quantity, 0);
-            document.getElementById("lblCartCount").textContent = totalQuantity;
+            document.getElementById("lblCartCount").textContent = totalQuantity; // 更新購物車數量顯示
         }
     </script>
 </body>

@@ -70,7 +70,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="checkout.aspx" />
     <Content Include="css\4.0.0.bootstrap.min.css" />
     <Content Include="css\css%403.css" />
     <Content Include="GeneralReport.aspx" />
@@ -79,7 +78,6 @@
     <Content Include="js\jquery-3.2.1.slim.min.js" />
     <Content Include="js\popper1.min.js" />
     <Content Include="login.aspx" />
-    <Content Include="Order.aspx" />
     <Content Include="photo\logo.png" />
     <Content Include="photo\麥當勞.jpg" />
     <Content Include="Register.aspx" />
@@ -90,13 +88,6 @@
     <Content Include="Welcome.aspx" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="checkout.aspx.cs">
-      <DependentUpon>checkout.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="checkout.aspx.designer.cs">
-      <DependentUpon>checkout.aspx</DependentUpon>
-    </Compile>
     <Compile Include="GeneralReport.aspx.cs">
       <DependentUpon>GeneralReport.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -123,13 +114,6 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Order.aspx.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Order.aspx.designer.cs">
-      <DependentUpon>Order.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Register.aspx.cs">
