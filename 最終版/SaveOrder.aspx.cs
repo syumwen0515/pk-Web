@@ -34,11 +34,28 @@ namespace 最終版
                 using (OleDbConnection connection = new OleDbConnection(connectionString))
                 {
                     connection.Open();
+
+                    // 查詢當前最大的訂單編號
+                    string maxOrderNumberQuery = "SELECT MAX(OrderNumber) FROM Orders";
+                    int maxOrderNumber = 0;
+                    using (OleDbCommand maxOrderNumberCommand = new OleDbCommand(maxOrderNumberQuery, connection))
+                    {
+                        var result = maxOrderNumberCommand.ExecuteScalar();
+                        if (result != DBNull.Value)
+                        {
+                            maxOrderNumber = Convert.ToInt32(result);
+                        }
+                    }
+
+                    // 生成新的訂單編號
+                    maxOrderNumber++;
+
                     foreach (var order in orders)
                     {
-                        string query = "INSERT INTO Orders (UserName, Product, Quantity, Price, TotalPrice, OrderTime) VALUES (@UserName, @Product, @Quantity, @Price, @TotalPrice, @OrderTime)";
+                        string query = "INSERT INTO Orders (OrderNumber, UserName, Product, Quantity, Price, TotalPrice, OrderTime) VALUES (@OrderNumber, @UserName, @Product, @Quantity, @Price, @TotalPrice, @OrderTime)";
                         using (OleDbCommand command = new OleDbCommand(query, connection))
                         {
+                            command.Parameters.Add(new OleDbParameter("@OrderNumber", OleDbType.Integer)).Value = maxOrderNumber;
                             command.Parameters.Add(new OleDbParameter("@UserName", OleDbType.VarChar)).Value = userName;
                             command.Parameters.Add(new OleDbParameter("@Product", OleDbType.VarChar)).Value = order.name;
                             command.Parameters.Add(new OleDbParameter("@Quantity", OleDbType.Integer)).Value = order.quantity;
@@ -50,6 +67,11 @@ namespace 最終版
                         }
                     }
                 }
+
+                // 返回成功響應
+                Response.ContentType = "application/json";
+                Response.Write("{\"status\":\"success\"}");
+                Response.End();
             }
         }
 

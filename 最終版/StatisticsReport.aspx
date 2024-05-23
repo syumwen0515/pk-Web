@@ -6,9 +6,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>統計報表</title>
-    <link href="css/4.0.0.bootstrap.min.css" rel="stylesheet" />
+<%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="css/bootstrap4.5.2.min.css" rel="stylesheet" />
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="Welcome.aspx">熱食部購物系統</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="Welcome.aspx">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="GeneralReport.aspx">一般報表</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="StatisticsReport.aspx">統計報表 <span class="sr-only">(current)</span></a>
+                </li>
+            </ul>
+            <span class="navbar-text">
+                Hi, <asp:Label ID="lblUserIdNavbar" runat="server" Text=""></asp:Label>!
+            </span>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h1 class="mb-4">統計報表</h1>
         <form id="form1" runat="server">
@@ -54,10 +78,14 @@
     </div>
 
     <!-- 引入 Bootstrap JS（如果需要） -->
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper1.min.js"></script>
-    <script src="js/4.0.0.bootstrap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--%>
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+<%--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>--%>
+    <script src="js/popper2.6.0.min.js"></script>
+<%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--%>
+    <script src="js/bootstrap4.5.2.min.js"></script>
+<%--    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>--%>
+    <script src="js/chart.js"></script>
     <script>
         // 在頁面加載時獲取數據並繪製圖表
         document.addEventListener('DOMContentLoaded', function () {

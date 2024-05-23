@@ -71,12 +71,17 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="css\4.0.0.bootstrap.min.css" />
+    <Content Include="css\bootstrap4.5.2.min.css" />
     <Content Include="css\css%403.css" />
     <Content Include="GeneralReport.aspx" />
     <Content Include="index.aspx" />
     <Content Include="js\4.0.0.bootstrap.min.js" />
+    <Content Include="js\bootstrap4.5.2.min.js" />
+    <Content Include="js\chart.js" />
     <Content Include="js\jquery-3.2.1.slim.min.js" />
+    <Content Include="js\jquery-3.5.1.slim.min.js" />
     <Content Include="js\popper1.min.js" />
+    <Content Include="js\popper2.6.0.min.js" />
     <Content Include="login.aspx" />
     <Content Include="photo\logo.png" />
     <Content Include="photo\麥當勞.jpg" />

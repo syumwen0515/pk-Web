@@ -6,7 +6,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Store</title>
-    <link href="css/4.0.0.bootstrap.min.css" rel="stylesheet" />
+<%--    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet" />--%>
+    <link href="css/bootstrap4.5.2.min.css" rel="stylesheet" />
     <style>
         .sidebar {
             background-color: #f8f9fa;
@@ -35,61 +36,67 @@
     </style>
 </head>
 <body onload="showAllCategories()">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a class="navbar-brand" href="index.aspx">熱食部購物系統</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="GeneralReport.aspx">一般報表</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="StatisticsReport.aspx">統計報表</a>
-                </li>
-            </ul>
-            <span class="navbar-text">
-                Hi, <asp:Label ID="lblUserIdNavbar" runat="server" Text=""></asp:Label>!
-            </span>
-            <button type="button" class="btn btn-light ml-3" onclick="openCartModal()">購物車 <span id="lblCartCount" class="badge badge-pill badge-primary">0</span></button>
-        </div>
-    </nav>
+    <form id="form1" runat="server">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.aspx">熱食部購物系統</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="Welcome.aspx">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="GeneralReport.aspx">一般報表</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="StatisticsReport.aspx">統計報表</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    Hi, <asp:Label ID="lblUserIdNavbar" runat="server" Text=""></asp:Label>!
+                </span>
+                <button type="button" class="btn btn-light ml-3" onclick="openCartModal()">購物車 <span id="lblCartCount" class="badge badge-pill badge-primary">0</span></button>
+                <asp:Button ID="btnLogout" runat="server" CssClass="btn btn-danger ml-3" Text="登出" OnClick="btnLogout_Click" />
+            </div>
+        </nav>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="sidebar">
-                    <h5>分類</h5>
-                    <a href="#" class="category-link" onclick="showAllCategories()">全部商品</a>
-                    <a href="#" class="category-link" onclick="showCategory('主食')">主食</a>
-                    <a href="#" class="category-link" onclick="showCategory('點心')">點心</a>
-                    <a href="#" class="category-link" onclick="showCategory('飲料')">飲料</a>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar">
+                        <h5>分類</h5>
+                        <a href="#" class="category-link" onclick="showAllCategories()">全部商品</a>
+                        <a href="#" class="category-link" onclick="showCategory('主食')">主食</a>
+                        <a href="#" class="category-link" onclick="showCategory('點心')">點心</a>
+                        <a href="#" class="category-link" onclick="showCategory('飲料')">飲料</a>
+                    </div>
+                    <div class="sidebar mt-4">
+                        <h5>購物清單</h5>
+                        <ul id="cartItems"></ul>
+                        <div>
+                            <button class="btn btn-danger mt-2" type="button" onclick="clearCart()">清空</button>
+                            <button class="btn btn-success mt-2" type="button" onclick="checkout()">送出</button>
+                        </div>
+                    </div>
                 </div>
-                <div class="sidebar mt-4">
-                    <h5>購物清單</h5>
-                    <ul id="cartItems"></ul>
-                    <div>
-                        <button class="btn btn-danger mt-2" onclick="clearCart()">清空</button>
-                        <button class="btn btn-success mt-2" onclick="checkout()">送出</button>
+                <div class="col-md-9">
+                    <div class="row" id="productList">
+                        <!-- 商品列表將在這裡顯示 -->
                     </div>
                 </div>
             </div>
-            <div class="col-md-9">
-                <div class="row" id="productList">
-                    <!-- 商品列表將在這裡顯示 -->
-                </div>
-            </div>
         </div>
-    </div>
+    </form>
 
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper1.min.js"></script>
-    <script src="js/4.0.0.bootstrap.min.js"></script>
+<%--    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>--%>
+    <script src="js/jquery-3.5.1.slim.min.js"></script>
+<%--    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js"></script>--%>
+    <script src="js/popper2.6.0.min.js"></script>
+<%--    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>--%>
+    <script src="js/bootstrap4.5.2.min.js"></script>
     <script>
         // 初始化購物車
         var cartItems = [];
@@ -197,7 +204,6 @@
                 });
         }
 
-
         // 顯示特定分類的商品
         function showCategory(category) {
             var allProducts = document.querySelectorAll('.col-md-4');
@@ -261,10 +267,19 @@
             xhr.open("POST", "SaveOrder.aspx", true);
             xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
             xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    // 成功訊息
-                    alert("訂單已成功提交！");
-                    clearCart(); // 清空購物車
+                if (xhr.readyState === 4) {
+                    if (xhr.status === 200) {
+                        // 成功訊息
+                        var response = JSON.parse(xhr.responseText);
+                        if (response.status === "success") {
+                            alert("訂單已成功提交！");
+                            clearCart(); // 清空購物車
+                        } else {
+                            alert("訂單提交失敗，請重試！");
+                        }
+                    } else {
+                        alert("訂單提交失敗，請重試！");
+                    }
                 }
             };
             xhr.send(orderData); // 發送訂單數據

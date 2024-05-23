@@ -1,37 +1,39 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace 最終版
 {
-    public partial class Welcome : System.Web.UI.Page
+    public partial class Welcome : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            // 检查是否存在名为 "UserId" 的 cookie
+            if (!IsPostBack)
+            {
+                if (Request.Cookies["UserId"] != null)
+                {
+                    string userId = Request.Cookies["UserId"].Value;
+                    lblUserIdNavbar.Text = userId;
+                }
+                else
+                {
+                    lblUserIdNavbar.Text = "Guest";
+                }
+            }
+        }
+
+        protected void btnLogout_Click(object sender, EventArgs e)
+        {
+            // 清除UserId的Cookie
             if (Request.Cookies["UserId"] != null)
             {
-                // 获取名为 "UserId" 的 cookie 的值
-                string userId = Request.Cookies["UserId"].Value;
-
-                // 将用户 ID 设置为 lblUserIdNavbar 的文本
-                lblUserIdNavbar.Text = userId;
+                HttpCookie cookie = new HttpCookie("UserId");
+                cookie.Expires = DateTime.Now.AddDays(-1);
+                Response.Cookies.Add(cookie);
             }
-            else
-            {
-                // 如果不存在名为 "UserId" 的 cookie，则将文本设置为默认值或者空字符串
-                lblUserIdNavbar.Text = "Guest";
-            }
+
+            // 重定向到index.aspx
+            Response.Redirect("index.aspx");
         }
-
-        protected void checkout()
-        {
-            
-        }
-
-
     }
 }

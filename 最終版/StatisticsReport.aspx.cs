@@ -13,6 +13,21 @@ namespace 最終版
             {
                 LoadStatistics();
             }
+            // 检查是否存在名为 "UserId" 的 cookie
+            if (Request.Cookies["UserId"] != null)
+            {
+                // 获取名为 "UserId" 的 cookie 的值
+                string userId = Request.Cookies["UserId"].Value;
+
+                // 将用户 ID 设置为 lblUserIdNavbar 的文本
+                lblUserIdNavbar.Text = userId;
+            }
+            else
+            {
+                // 如果不存在名为 "UserId" 的 cookie，则将文本设置为默认值或者空字符串
+                lblUserIdNavbar.Text = "Guest";
+            }
+
         }
 
         private void LoadStatistics()
@@ -25,7 +40,7 @@ namespace 最終版
                     connection.Open();
 
                     // 獲取總訂單數
-                    OleDbCommand totalOrdersCommand = new OleDbCommand("SELECT COUNT(*) FROM Orders", connection);
+                    OleDbCommand totalOrdersCommand = new OleDbCommand("SELECT MAX(OrderNumber) FROM Orders", connection);
                     int totalOrders = (int)totalOrdersCommand.ExecuteScalar();
                     lblTotalOrders.Text = totalOrders.ToString();
 
